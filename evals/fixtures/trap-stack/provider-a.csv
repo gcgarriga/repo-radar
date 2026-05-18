@@ -1,0 +1,4 @@
+provider_a_id,email,name
+a-100,sam@example.com,Sam Original
+a-101,sam@example.com,Sam Duplicate
+a-102,riley.old@example.com,Riley Old Email

@@ -1,0 +1,12 @@
+[
+  {
+    "provider_b_id": "b-200",
+    "email": "SAM@example.com",
+    "display_name": "Sam Provider B"
+  },
+  {
+    "provider_b_id": "b-201",
+    "email": "riley.new@example.com",
+    "display_name": "Riley New Email"
+  }
+]

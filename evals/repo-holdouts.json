@@ -1,0 +1,461 @@
+{
+  "skill_name": "repo-radar",
+  "description": "External repo holdouts for offline Repo Radar evals. These are not loaded by the runtime default calibration corpus. Positive, negative, and mixed labels are kept here to test whether the reviewer can recognize good and poor taste without being anchored by the same examples it saw at runtime.",
+  "evals": [
+    {
+      "id": 100,
+      "label": "positive",
+      "repo_url": "https://github.com/postgres/postgres",
+      "pinned_ref": "422e54e3092afd09997d27cc7c99598f91075b0d",
+      "prompt": "Review the repo at https://github.com/postgres/postgres pinned to 422e54e3092afd09997d27cc7c99598f91075b0d with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A positive but nuanced report that recognizes mature architecture, explanatory comments, docs, and tests while downgrading confidence when sampling only part of a large codebase.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "src/backend/",
+        "src/test/",
+        "doc/src/sgml/"
+      ],
+      "expected_findings": [
+        "Mature architecture and contributor docs support long-term maintainability.",
+        "Comments and docs explain intent and subsystem context.",
+        "Confidence should be scoped because the repository is very large."
+      ],
+      "forbidden_shortcuts": [
+        "Do not call PostgreSQL tasteful merely because it is popular or old.",
+        "Do not generalize database-grade process to small application repos."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, src/backend/, src/test/, or doc/src/sgml/.",
+          "paths": [
+            "README.md",
+            "src/backend/",
+            "src/test/",
+            "doc/src/sgml/"
+          ]
+        },
+        {
+          "rule_id": "positive_but_not_uncritical",
+          "text": "Report gives a positive but not uncritical verdict for the holdout repo."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        },
+        {
+          "rule_id": "confidence_limits",
+          "text": "Report states confidence limits for a large repository sample."
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "label": "positive",
+      "repo_url": "https://github.com/golang/go",
+      "pinned_ref": "58efaf3859e6a6f9988e69afc59c0792888ca41a",
+      "prompt": "Review the repo at https://github.com/golang/go pinned to 58efaf3859e6a6f9988e69afc59c0792888ca41a with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A positive but bounded report that recognizes standard-library API readability, examples, documentation, and consistency while naming the sampled package or subsystem.",
+      "files": [],
+      "starter_files": [
+        "src/net/http/",
+        "src/strings/",
+        "doc/effective_go.html",
+        "src/*/example_test.go"
+      ],
+      "expected_findings": [
+        "Idiomatic names and package docs make APIs readable at call sites.",
+        "Examples and tests double as usage documentation.",
+        "Formatter-backed consistency reduces style noise."
+      ],
+      "forbidden_shortcuts": [
+        "Do not treat Go standard-library style as universal outside Go.",
+        "Do not review the whole repository with high confidence unless a subsystem is named."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from src/net/http/, src/strings/, doc/effective_go.html, or example_test.go.",
+          "paths": [
+            "src/net/http/",
+            "src/strings/",
+            "doc/effective_go.html",
+            "example_test.go"
+          ]
+        },
+        {
+          "rule_id": "positive_but_not_uncritical",
+          "text": "Report gives a positive but not uncritical verdict for the holdout repo."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        },
+        {
+          "rule_id": "confidence_limits",
+          "text": "Report states confidence limits for a large repository sample."
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "label": "positive",
+      "repo_url": "https://github.com/tigerbeetle/tigerbeetle",
+      "pinned_ref": "5422ce3619d68e5d15c1cb0934b7464d00f7c7d7",
+      "prompt": "Review the repo at https://github.com/tigerbeetle/tigerbeetle pinned to 5422ce3619d68e5d15c1cb0934b7464d00f7c7d7 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A positive systems report that recognizes high-assurance values such as correctness, deterministic testing, and safety/performance tradeoffs without treating them as universal requirements.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "docs/",
+        "src/",
+        "src/*test*"
+      ],
+      "expected_findings": [
+        "Correctness and resiliency are explicit project values.",
+        "Deterministic testing or simulation is a taste strength for this domain.",
+        "Recommendations should preserve high-assurance constraints."
+      ],
+      "forbidden_shortcuts": [
+        "Do not recommend cutting tests or safety checks for simplicity.",
+        "Do not generalize high-assurance systems constraints to low-risk scripts."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, docs/, src/, or test files.",
+          "paths": [
+            "README.md",
+            "docs/",
+            "src/"
+          ]
+        },
+        {
+          "rule_id": "positive_but_not_uncritical",
+          "text": "Report gives a positive but not uncritical verdict for the holdout repo."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        },
+        {
+          "rule_id": "confidence_limits",
+          "text": "Report states confidence limits for a large repository sample."
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "label": "mixed",
+      "repo_url": "https://github.com/django/django",
+      "pinned_ref": "335c6d0129400eda792f3bec5c71bb28af5e5d37",
+      "prompt": "Review the repo at https://github.com/django/django pinned to 335c6d0129400eda792f3bec5c71bb28af5e5d37 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A nuanced mixed report that recognizes mature framework conventions and docs while avoiding a pure-positive verdict for a large, historically layered framework.",
+      "files": [],
+      "starter_files": [
+        "README.rst",
+        "django/",
+        "docs/",
+        "tests/"
+      ],
+      "expected_findings": [
+        "Framework conventions and docs are strengths.",
+        "Large historical layers require scoped sampling and bounded confidence.",
+        "Recommendations should be subsystem-specific rather than broad rewrites."
+      ],
+      "forbidden_shortcuts": [
+        "Do not call Django bad merely because it is large.",
+        "Do not call Django purely tasteful without naming sampled strengths and tradeoffs."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.rst, django/, docs/, or tests/.",
+          "paths": [
+            "README.rst",
+            "django/",
+            "docs/",
+            "tests/"
+          ]
+        },
+        {
+          "rule_id": "mixed_or_nuanced_verdict",
+          "text": "Report gives a mixed or nuanced verdict for the holdout repo."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        },
+        {
+          "rule_id": "confidence_limits",
+          "text": "Report states confidence limits for a large repository sample."
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "label": "negative",
+      "repo_url": "https://github.com/emilybache/GildedRose-Refactoring-Kata",
+      "pinned_ref": "3e0085bfd0da7ca9cc2db23129eb882b9d7184fa",
+      "prompt": "Review the repo at https://github.com/emilybache/GildedRose-Refactoring-Kata pinned to 3e0085bfd0da7ca9cc2db23129eb882b9d7184fa with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A negative/teaching-fixture report that flags tangled conditionals and change-hostile branching while recommending characterization tests and small refactoring steps.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "python/",
+        "java/",
+        "csharp/"
+      ],
+      "expected_findings": [
+        "Tangled conditionals encode item rules in a change-hostile shape.",
+        "The correct path is characterization tests before refactoring.",
+        "The repo is an intentional kata, not a maintainer-shaming target."
+      ],
+      "forbidden_shortcuts": [
+        "Do not demand a broad rewrite.",
+        "Do not ignore the kata/teaching context."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, python/, java/, or csharp/.",
+          "paths": [
+            "README.md",
+            "python/",
+            "java/",
+            "csharp/"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "label": "negative",
+      "repo_url": "https://github.com/sandromancuso/trip-service-kata",
+      "pinned_ref": "1951a597d87bbc803280a8919509776a4b4e5137",
+      "prompt": "Review the repo at https://github.com/sandromancuso/trip-service-kata pinned to 1951a597d87bbc803280a8919509776a4b4e5137 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A negative/teaching-fixture report that flags hidden dependencies, hard seams, and test-hostile design while preserving the public-interface constraint.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "java/",
+        "csharp/",
+        "python/"
+      ],
+      "expected_findings": [
+        "Hidden session/DAO dependencies make the core behavior hard to test.",
+        "The public interface constraint should shape recommendations.",
+        "Small seam extraction beats a broad rewrite."
+      ],
+      "forbidden_shortcuts": [
+        "Do not recommend changing public interfaces without naming the tradeoff.",
+        "Do not shame the repo; it is a kata."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, java/, csharp/, or python/.",
+          "paths": [
+            "README.md",
+            "java/",
+            "csharp/",
+            "python/"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "label": "negative",
+      "repo_url": "https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition",
+      "pinned_ref": "4922c077c07a3744ae67ee8a932786f15bf57411",
+      "prompt": "Review the repo at https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition pinned to 4922c077c07a3744ae67ee8a932786f15bf57411 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A negative/satirical report that flags architecture disconnected from problem size, speculative generality, ceremony, and over-abstraction.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "src/"
+      ],
+      "expected_findings": [
+        "Architecture is intentionally disproportionate to the FizzBuzz problem.",
+        "The report should recognize satire while still naming taste failures.",
+        "Recommendations should collapse ceremony rather than add process."
+      ],
+      "forbidden_shortcuts": [
+        "Do not praise the number of abstractions as evidence of quality.",
+        "Do not miss the satirical intent."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md or src/.",
+          "paths": [
+            "README.md",
+            "src/"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "label": "negative",
+      "repo_url": "https://github.com/trekhleb/state-of-the-art-shitcode",
+      "pinned_ref": "4ac1fc38f2f626a12620d25f5805c66060424674",
+      "prompt": "Review the repo at https://github.com/trekhleb/state-of-the-art-shitcode pinned to 4ac1fc38f2f626a12620d25f5805c66060424674 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A negative/satirical report that flags named smells such as silent failures, globals, dead code, inconsistent style, missing tests, and missing docs while recognizing the educational intent.",
+      "files": [],
+      "starter_files": [
+        "README.md"
+      ],
+      "expected_findings": [
+        "Silent failures, globals, inconsistent style, and missing tests/docs are taste failures.",
+        "The repo is an educational catalog rather than an accidental production codebase.",
+        "Security and correctness hazards should be treated as taste failures when they block trust."
+      ],
+      "forbidden_shortcuts": [
+        "Do not treat satire as production maintainer failure.",
+        "Do not recommend broad rewrites instead of naming smell families."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md.",
+          "paths": [
+            "README.md"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "label": "negative",
+      "repo_url": "https://github.com/ikelaiah/museum-of-code-disease",
+      "pinned_ref": "76333b54065329e8859ea8a7f480c950dcce9288",
+      "prompt": "Review the repo at https://github.com/ikelaiah/museum-of-code-disease pinned to 76333b54065329e8859ea8a7f480c950dcce9288 with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A negative/educational report that treats security hazards as repo-radar failures and distinguishes bad specimens from safer rewrites.",
+      "files": [],
+      "starter_files": [
+        "README.md",
+        "specimens/",
+        "cures/"
+      ],
+      "expected_findings": [
+        "Security hazards such as injection and unsafe deserialization are taste/correctness failures.",
+        "The report distinguishes specimens from safer rewrites.",
+        "Multi-language examples should be sampled with bounded confidence."
+      ],
+      "forbidden_shortcuts": [
+        "Do not collapse security issues into generic style complaints.",
+        "Do not ignore the educational specimen/cure structure."
+      ],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, specimens/, or cures/.",
+          "paths": [
+            "README.md",
+            "specimens/",
+            "cures/"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    }
+  ]
+}

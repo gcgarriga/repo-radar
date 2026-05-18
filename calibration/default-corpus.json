@@ -1,0 +1,660 @@
+{
+  "version": 1,
+  "selection_policy": "Small default positive corpus of public repositories with clear onboarding, focused APIs, readable tests, documented intent, and explicit boundaries; negative and mixed repositories are held out for evals rather than used as runtime taste anchors. Entries pin reviewed refs so evidence anchors are stable. Users may override this corpus.",
+  "repos": [
+    {
+      "slug": "pallets/click",
+      "repo_url": "https://github.com/pallets/click",
+      "pinned_ref": "c943271a269e6941fcc51e3506ead074b9dda6be",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "onboarding",
+        "testing"
+      ],
+      "language": "Python",
+      "domain": "Command-line interface framework",
+      "why_included": "A mature Python CLI library with a small public surface, clear usage examples, and documentation that teaches the mental model before advanced features.",
+      "taste_signals": [
+        "Public API is centered on a few composable decorators and command objects.",
+        "Documentation starts with simple examples before exposing advanced behavior.",
+        "Tests exercise user-visible CLI behavior instead of only internals."
+      ],
+      "review_focus": [
+        "API discoverability",
+        "Onboarding path",
+        "Tests as usage examples"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Shows the value proposition and quickest copyable command pattern for newcomers."
+        },
+        {
+          "path": "docs/quickstart.md",
+          "why": "Demonstrates how Click teaches decorators, commands, and options incrementally."
+        },
+        {
+          "path": "tests/test_basic.py",
+          "why": "Provides concrete examples of testing user-visible CLI behavior."
+        }
+      ],
+      "taste_boundary": "Use Click as a benchmark for decorator-driven CLI ergonomics and progressive disclosure; do not reward hidden command magic unless the user path stays obvious.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "encode/httpx",
+      "repo_url": "https://github.com/encode/httpx",
+      "pinned_ref": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "library-api",
+        "testing"
+      ],
+      "language": "Python",
+      "domain": "HTTP client",
+      "why_included": "A Python HTTP client with a familiar interface, strong docs, and clear separation between public client APIs and transport internals.",
+      "taste_signals": [
+        "Common usage is obvious from the top-level API.",
+        "Advanced transport behavior is isolated behind explicit boundaries.",
+        "Docs and tests explain both synchronous and asynchronous use cases."
+      ],
+      "review_focus": [
+        "Boundary clarity",
+        "Public API usability",
+        "Progressive disclosure"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Introduces the requests-like mental model and the public client surface."
+        },
+        {
+          "path": "docs/quickstart.md",
+          "why": "Shows the expected path from simple requests to clients, streaming, and async usage."
+        },
+        {
+          "path": "httpx/_transports/",
+          "why": "Marks the internal transport seam that keeps advanced behavior out of the common path."
+        }
+      ],
+      "taste_boundary": "Use HTTPX as a benchmark for familiar HTTP ergonomics with explicit sync, async, and transport boundaries; penalize designs that hide lifecycle or transport complexity in the top-level API.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "fastapi/typer",
+      "repo_url": "https://github.com/fastapi/typer",
+      "pinned_ref": "f234b1cbcfb5e443d44d3a745a6528f3ad2554aa",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "examples",
+        "onboarding"
+      ],
+      "language": "Python",
+      "domain": "Type-hint driven CLI framework",
+      "why_included": "A CLI framework optimized for user ergonomics with examples that make the intended path easy to copy and adapt.",
+      "taste_signals": [
+        "Simple programs require little boilerplate.",
+        "Type hints serve both implementation and user-facing behavior.",
+        "Examples make the library feel usable before reading internals."
+      ],
+      "review_focus": [
+        "Developer experience",
+        "Example quality",
+        "Low-surprise defaults"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Frames the no-boilerplate promise and shows the smallest useful CLI shape."
+        },
+        {
+          "path": "docs/tutorial/first-steps.md",
+          "why": "Captures the intended learning path from Python function signatures to CLI behavior."
+        },
+        {
+          "path": "docs/tutorial/options/",
+          "why": "Shows where the framework explains option defaults, help text, and validation."
+        }
+      ],
+      "taste_boundary": "Use Typer as a benchmark for developer-experience-first CLIs where annotations reduce ceremony; penalize clever type usage when it makes command behavior harder to predict.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "karpathy/micrograd",
+      "repo_url": "https://github.com/karpathy/micrograd",
+      "pinned_ref": "c911406e5ace8742e5841a7e0df113ecb5d54685",
+      "taste_categories": [
+        "educational",
+        "minimalism",
+        "ml-ai",
+        "testing"
+      ],
+      "language": "Python",
+      "domain": "Educational automatic differentiation",
+      "why_included": "A compact educational codebase where the architecture is intentionally small enough to understand in one sitting.",
+      "taste_signals": [
+        "Core concepts map directly to small, readable code units.",
+        "The project avoids unnecessary abstraction for its stated purpose.",
+        "Tests and examples reinforce the main mental model."
+      ],
+      "review_focus": [
+        "Simplicity",
+        "Conceptual compression",
+        "Newcomer understandability"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Explains the educational scope and sets expectations for a tiny implementation."
+        },
+        {
+          "path": "micrograd/engine.py",
+          "why": "Contains the compact core abstraction that carries the project mental model."
+        },
+        {
+          "path": "test/test_engine.py",
+          "why": "Shows the intended behavior through small examples instead of framework-heavy tests."
+        }
+      ],
+      "taste_boundary": "Use micrograd as a benchmark for pedagogical minimalism and conceptual compression; do not treat missing production concerns as taste failures inside its educational scope.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "karpathy/nanoGPT",
+      "repo_url": "https://github.com/karpathy/nanoGPT",
+      "pinned_ref": "3adf61e154c3fe3fca428ad6bc3818b27a3b8291",
+      "taste_categories": [
+        "educational",
+        "examples",
+        "minimalism",
+        "ml-ai"
+      ],
+      "language": "Python",
+      "domain": "Educational GPT training",
+      "why_included": "A compact GPT training codebase that makes transformer model definition, training, configuration, and sampling approachable without a production framework stack.",
+      "taste_signals": [
+        "Core training and model logic are concentrated in small, readable files.",
+        "The README gives copyable quick-start paths for both tiny local experiments and larger GPT-2 reproduction.",
+        "Configuration files expose the important model and training choices without hiding them behind a framework."
+      ],
+      "review_focus": [
+        "Pedagogical architecture",
+        "Experiment hackability",
+        "Visible training path"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Explains the simple training path, intended scope, dependencies, and why the repo is deliberately compact."
+        },
+        {
+          "path": "model.py",
+          "why": "Contains the focused GPT model definition that keeps the main mental model visible."
+        },
+        {
+          "path": "train.py",
+          "why": "Shows the training loop and operational choices without scattering them across a large framework."
+        },
+        {
+          "path": "config/train_shakespeare_char.py",
+          "why": "Provides a small, copyable local experiment path that helps newcomers build intuition."
+        }
+      ],
+      "taste_boundary": "Use nanoGPT as a benchmark for educational ML/AI hackability and transparent training loops; do not treat omitted production deployment, safety, or large-scale orchestration concerns as failures inside its learning-oriented scope.",
+      "last_reviewed": "2026-05-14"
+    },
+    {
+      "slug": "scikit-learn/scikit-learn",
+      "repo_url": "https://github.com/scikit-learn/scikit-learn",
+      "pinned_ref": "33f94f4d51aa692ba29741fd87f85501332eb5c9",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "examples",
+        "ml-ai",
+        "testing"
+      ],
+      "language": "Python",
+      "domain": "Machine learning library",
+      "why_included": "A mature ML library with a famously consistent estimator API, extensive examples, strong contributor guidance, and tests that enforce cross-estimator behavior.",
+      "taste_signals": [
+        "The estimator interface makes diverse models feel predictable through shared fit, predict, transform, and parameter conventions.",
+        "Developer documentation explains API contracts and contribution expectations rather than leaving conventions implicit.",
+        "Common tests and examples reinforce consistency across a large model surface."
+      ],
+      "review_focus": [
+        "Consistent public API",
+        "Large-library contributor guidance",
+        "Cross-cutting test contracts"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.rst",
+          "why": "Frames the project scope, installation path, contributor guide, and documentation entry points."
+        },
+        {
+          "path": "doc/developers/develop.rst",
+          "why": "Documents estimator API conventions and expectations for compatible components."
+        },
+        {
+          "path": "sklearn/base.py",
+          "why": "Shows the shared estimator base behavior that anchors the library's public mental model."
+        },
+        {
+          "path": "sklearn/tests/test_common.py",
+          "why": "Captures common estimator behavior through executable cross-library checks."
+        }
+      ],
+      "taste_boundary": "Use scikit-learn as a benchmark for large ML library API consistency and contributor-facing contracts; do not require small experimental repos to copy its full compatibility and test matrix.",
+      "last_reviewed": "2026-05-14"
+    },
+    {
+      "slug": "stanfordnlp/dspy",
+      "repo_url": "https://github.com/stanfordnlp/dspy",
+      "pinned_ref": "b175ef87ea4054f763e74734941ae37c21451cb2",
+      "taste_categories": [
+        "agent-native-docs",
+        "api-design",
+        "library-api",
+        "ml-ai"
+      ],
+      "language": "Python",
+      "domain": "LLM programming framework",
+      "why_included": "A modern LLM framework that treats language-model calls as typed program modules, with explicit seams between signatures, prediction modules, and prompt/program optimization.",
+      "taste_signals": [
+        "Signatures make LLM inputs and outputs explicit instead of burying contracts in prose prompts.",
+        "Prediction modules compose behavior such as chain-of-thought by extending signatures rather than scattering prompt strings across call sites.",
+        "Optimization machinery is separated from the common declaration and execution path."
+      ],
+      "review_focus": [
+        "Declarative LLM I/O contracts",
+        "Module composition",
+        "Optimization boundary"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "dspy/__init__.py",
+          "why": "Shows the public surface and deliberate user-facing aliases."
+        },
+        {
+          "path": "dspy/signatures/signature.py",
+          "why": "Contains the core typed signature abstraction for declaring LLM input and output contracts."
+        },
+        {
+          "path": "dspy/predict/chain_of_thought.py",
+          "why": "Demonstrates a small composition layer that adds reasoning by extending a signature and wrapping Predict."
+        },
+        {
+          "path": "tests/signatures/test_signature.py",
+          "why": "Exercises user-facing signature behavior with compact examples."
+        }
+      ],
+      "taste_boundary": "Use DSPy as a benchmark for declarative LLM I/O contracts and separating program structure from prompt optimization; do not require simple prompt scripts to adopt Signature or optimizer machinery unless systematic prompt improvement is a project value.",
+      "last_reviewed": "2026-05-14"
+    },
+    {
+      "slug": "huggingface/transformers",
+      "repo_url": "https://github.com/huggingface/transformers",
+      "pinned_ref": "bb911642fdb31bd59a800de394ed172671bb2fe4",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "examples",
+        "ml-ai",
+        "onboarding"
+      ],
+      "language": "Python",
+      "domain": "Deep learning model library",
+      "why_included": "A large LLM-era model library that explicitly documents its scope, public mental model, and tradeoff between broad model coverage and per-model researcher iteration speed.",
+      "taste_signals": [
+        "The public API gives users a stable task-oriented path before they need model internals.",
+        "Contributor documentation explains the one-folder-per-model pattern and why model files are not aggressively refactored into shared abstractions.",
+        "The project states when not to use the library, making scope boundaries explicit instead of implied."
+      ],
+      "review_focus": [
+        "Scope declaration",
+        "Task-oriented pipeline API",
+        "Contributor tradeoff documentation"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Documents the public quickstart and explicit when-to-use/when-not-to-use scope boundary."
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "why": "Explains model contribution conventions and the rationale for keeping model implementations self-contained."
+        },
+        {
+          "path": "src/transformers/pipelines/base.py",
+          "why": "Defines the preprocess, forward, and postprocess pipeline seam for task-oriented inference."
+        },
+        {
+          "path": "examples/pytorch/",
+          "why": "Provides runnable, task-scoped examples outside the core library internals."
+        }
+      ],
+      "taste_boundary": "Use Transformers as a benchmark for large ML library scope declarations, task-oriented pipeline APIs, and honest contributor documentation about architectural tradeoffs; do not use model count or internal model-file complexity as taste evidence by itself.",
+      "last_reviewed": "2026-05-14"
+    },
+    {
+      "slug": "ggml-org/llama.cpp",
+      "repo_url": "https://github.com/ggml-org/llama.cpp",
+      "pinned_ref": "5c0e9468378eba6bf3cc1989ff5d62fbbe4d9e3a",
+      "taste_categories": [
+        "api-design",
+        "ml-ai",
+        "performance",
+        "systems"
+      ],
+      "language": "C++",
+      "domain": "Native LLM inference library",
+      "why_included": "A systems-level ML inference project with an explicit public C API boundary, hardware-aware layering, and examples that consume the API without leaking implementation internals.",
+      "taste_signals": [
+        "The public header separates model-level inference contracts from tensor backend implementation details.",
+        "Examples use the public API as the application boundary, making lifecycle and resource management visible.",
+        "The architecture separates tensor primitives, model inference APIs, and application examples instead of mixing hardware concerns into user code."
+      ],
+      "review_focus": [
+        "Public C API boundary",
+        "Hardware-aware layering",
+        "Inference lifecycle clarity"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "include/llama.h",
+          "why": "Defines the public API contract and visibility boundary for consumers."
+        },
+        {
+          "path": "README.md",
+          "why": "Explains quickstart commands, supported backends, quantization, and GGUF at the user level."
+        },
+        {
+          "path": "examples/",
+          "why": "Shows standalone consumers using the public API for common inference workflows."
+        },
+        {
+          "path": "src/",
+          "why": "Shows implementation concerns split below the public header boundary."
+        }
+      ],
+      "taste_boundary": "Use llama.cpp as a benchmark for C-level ML inference API design, explicit public-header contracts, and hardware-aware layering; do not apply its native optimization constraints to Python ML libraries or simple LLM applications.",
+      "last_reviewed": "2026-05-14"
+    },
+    {
+      "slug": "BurntSushi/ripgrep",
+      "repo_url": "https://github.com/BurntSushi/ripgrep",
+      "pinned_ref": "4519153e5e461527f4bca45b042fff45c4ec6fb9",
+      "taste_categories": [
+        "agent-native-docs",
+        "developer-experience",
+        "performance",
+        "systems"
+      ],
+      "language": "Rust",
+      "domain": "Search CLI",
+      "why_included": "A Rust search tool that balances a fast default path, practical CLI ergonomics, and detailed documentation for users who need to understand search behavior.",
+      "taste_signals": [
+        "The default command path optimizes for the most common recursive search workflow.",
+        "Documentation explains performance, ignore rules, Unicode behavior, and edge cases without hiding tradeoffs.",
+        "The project exposes powerful options while keeping the first-run mental model small."
+      ],
+      "review_focus": [
+        "CLI ergonomics",
+        "Performance-aware boundaries",
+        "Documentation of tradeoffs"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Introduces the tool, its defaults, and the user-facing reasons it feels faster and simpler."
+        },
+        {
+          "path": "GUIDE.md",
+          "why": "Explains advanced search behavior and option tradeoffs while preserving the core mental model."
+        }
+      ],
+      "taste_boundary": "Use ripgrep as a benchmark for high-performance CLI taste where complexity earns its keep by improving search UX, defaults, and cross-platform behavior.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "go-chi/chi",
+      "repo_url": "https://github.com/go-chi/chi",
+      "pinned_ref": "a54874f0e2f12647a19e82ee70dfa8185014100c",
+      "taste_categories": [
+        "api-design",
+        "examples",
+        "library-api",
+        "minimalism"
+      ],
+      "language": "Go",
+      "domain": "HTTP router",
+      "why_included": "A Go HTTP router that stays close to net/http, uses small composable interfaces, and teaches middleware and routing through compact examples.",
+      "taste_signals": [
+        "The API composes handlers, routers, and middleware without requiring a full application framework.",
+        "Examples demonstrate practical routing patterns before readers need to inspect internals.",
+        "The project keeps extension points idiomatic to Go's standard HTTP model."
+      ],
+      "review_focus": [
+        "Composable API shape",
+        "Idiomatic standard-library integration",
+        "Examples as architecture guidance"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Shows the router contract, middleware model, and concise examples for common HTTP services."
+        },
+        {
+          "path": "_examples/",
+          "why": "Provides runnable reference patterns that calibrate what the project considers idiomatic use."
+        }
+      ],
+      "taste_boundary": "Use chi as a benchmark for composable Go HTTP routing that avoids framework sprawl; penalize designs that bury net/http semantics behind unnecessary abstraction.",
+      "last_reviewed": "2026-05-10"
+    },
+    {
+      "slug": "sqlite/sqlite",
+      "repo_url": "https://github.com/sqlite/sqlite",
+      "pinned_ref": "02dc8d0c5f22e1ec5dcc0b427457dc0c5ecdd061",
+      "taste_categories": [
+        "agent-native-docs",
+        "correctness-heavy",
+        "systems",
+        "testing"
+      ],
+      "language": "C",
+      "domain": "Embedded database",
+      "why_included": "A compact embedded database with unusually strong correctness culture, source-tree documentation, portability discipline, and explicit testing practices.",
+      "taste_signals": [
+        "The source tree documents how the project is built, tested, and organized.",
+        "Correctness work includes multiple test harnesses, fuzzing, crash/OOM/I/O cases, and release checklists.",
+        "The architecture earns its complexity through portability and reliability constraints."
+      ],
+      "review_focus": [
+        "Correctness culture",
+        "Source-tree legibility",
+        "Test depth"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Maps the source tree and build/test workflow for contributors."
+        },
+        {
+          "path": "test/",
+          "why": "Shows the breadth of behavior, failure-mode, and regression testing."
+        },
+        {
+          "path": "doc/testrunner.md",
+          "why": "Explains the parallel test runner, release-test workflow, failure investigation path, and observable test outputs."
+        }
+      ],
+      "taste_boundary": "Use SQLite as a benchmark for correctness-heavy systems where deep tests and portability matter; do not require small apps to copy database-grade release machinery.",
+      "last_reviewed": "2026-05-12"
+    },
+    {
+      "slug": "redis/redis",
+      "repo_url": "https://github.com/redis/redis",
+      "pinned_ref": "6c3a8ecceff085835a5388e97af0238646755bfe",
+      "taste_categories": [
+        "api-design",
+        "minimalism",
+        "performance",
+        "systems"
+      ],
+      "language": "C",
+      "domain": "In-memory data store",
+      "why_included": "A systems codebase often praised for understandable C, direct data-structure implementation, and a simple user-facing product model.",
+      "taste_signals": [
+        "The operational model is easy to explain before reading internals.",
+        "Core implementation choices stay close to the product's data-structure concepts.",
+        "Documentation and command references keep user-facing behavior concrete."
+      ],
+      "review_focus": [
+        "Readable systems code",
+        "Product/API simplicity",
+        "Direct representation of core concepts"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Explains quick start, build path, command model, and project scope."
+        },
+        {
+          "path": "src/",
+          "why": "Contains the direct C implementation of server behavior and data structures."
+        },
+        {
+          "path": "tests/",
+          "why": "Shows executable coverage of user-visible command behavior."
+        }
+      ],
+      "taste_boundary": "Use Redis as a benchmark for direct systems design and product simplicity; treat it as a code and product-design reference, not an endorsement of current project governance or licensing, and do not over-reward global state or single-process assumptions outside this domain.",
+      "last_reviewed": "2026-05-12"
+    },
+    {
+      "slug": "pydantic/pydantic",
+      "repo_url": "https://github.com/pydantic/pydantic",
+      "pinned_ref": "ebc4652df990affb79bb3c3db960fb8d2a2b4308",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "library-api",
+        "testing"
+      ],
+      "language": "Python",
+      "domain": "Data validation",
+      "why_included": "A Python library that exposes a compact type-driven public model while hiding substantial validation and migration complexity.",
+      "taste_signals": [
+        "The public API lets users express validation through canonical Python type hints.",
+        "Docs and migration guides acknowledge compatibility pressure instead of hiding it.",
+        "Developer experience is a first-class design value rather than an afterthought."
+      ],
+      "review_focus": [
+        "Type-driven API design",
+        "Migration-aware documentation",
+        "Developer experience"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Frames the type-hint mental model and shows the smallest useful model shape."
+        },
+        {
+          "path": "docs/",
+          "why": "Shows the public learning path, concepts, and migration guidance."
+        },
+        {
+          "path": "tests/",
+          "why": "Captures validation behavior across many input and compatibility cases."
+        }
+      ],
+      "taste_boundary": "Use Pydantic as a benchmark for type-driven user APIs; do not assume validation frameworks are appropriate when a plain data structure would encode the invariant better.",
+      "last_reviewed": "2026-05-12"
+    },
+    {
+      "slug": "Textualize/rich",
+      "repo_url": "https://github.com/Textualize/rich",
+      "pinned_ref": "46cebbb032f920eb096efbaf23cdc6fe9dd541f7",
+      "taste_categories": [
+        "api-design",
+        "developer-experience",
+        "examples",
+        "onboarding"
+      ],
+      "language": "Python",
+      "domain": "Terminal rendering library",
+      "why_included": "A documentation-rich Python library where examples, API affordances, and visual output ergonomics make the common path approachable.",
+      "taste_signals": [
+        "The README shows concrete output examples before advanced configuration.",
+        "API surfaces are designed around user intent such as tables, progress, logging, and pretty output.",
+        "Documentation treats examples and screenshots as part of the interface contract."
+      ],
+      "review_focus": [
+        "Onboarding",
+        "API affordances",
+        "User empathy"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.md",
+          "why": "Demonstrates install/run commands, examples, and visual API affordances."
+        },
+        {
+          "path": "docs/",
+          "why": "Shows the guided learning path for common terminal UI tasks."
+        },
+        {
+          "path": "tests/",
+          "why": "Grounds visual and formatting behavior in executable expectations."
+        }
+      ],
+      "taste_boundary": "Use Rich as a benchmark for user-facing API empathy and example quality; do not apply visual-output priorities to non-UI libraries without an inferred value fit.",
+      "last_reviewed": "2026-05-12"
+    },
+    {
+      "slug": "minitest/minitest",
+      "repo_url": "https://github.com/minitest/minitest",
+      "pinned_ref": "3c50579723d1f2222b99ffea69f418ffa2ccb514",
+      "taste_categories": [
+        "developer-experience",
+        "library-api",
+        "minimalism",
+        "testing"
+      ],
+      "language": "Ruby",
+      "domain": "Testing library",
+      "why_included": "A small Ruby testing library that calibrates pragmatic minimalism, low ceremony, and practical interfaces over speculative abstraction.",
+      "taste_signals": [
+        "The project stays small enough for users to understand the testing model quickly.",
+        "Public APIs favor practical test writing over framework ceremony.",
+        "Metaprogramming earns its keep by reducing user friction without hiding the core model."
+      ],
+      "review_focus": [
+        "Minimalism",
+        "Pragmatic interfaces",
+        "Avoiding over-abstraction"
+      ],
+      "evidence_anchors": [
+        {
+          "path": "README.rdoc",
+          "why": "Explains the small-library philosophy and primary user-facing API."
+        },
+        {
+          "path": "lib/minitest/",
+          "why": "Shows the compact implementation of assertions, specs, and test execution."
+        },
+        {
+          "path": "test/",
+          "why": "Shows the library testing itself through its own usage patterns."
+        }
+      ],
+      "taste_boundary": "Use Minitest as a benchmark for low-ceremony library design; do not treat minimalism as a reason to omit explicit safety checks in high-risk domains.",
+      "last_reviewed": "2026-05-12"
+    }
+  ]
+}

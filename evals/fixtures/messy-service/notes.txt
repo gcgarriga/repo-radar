@@ -1,0 +1,2 @@
+remember to run app.py after manually creating data.db in sqlite browser
+if it breaks, delete out.json and try again
