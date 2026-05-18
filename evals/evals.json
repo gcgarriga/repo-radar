@@ -1,0 +1,141 @@
+{
+  "skill_name": "repo-radar",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Review the repo at ./evals/fixtures/tasteful-cli with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A positive but not uncritical repo-radar report that cites concrete docs, source, and test evidence; preserves repo evidence -> taste implication -> recommendation; and limits recommendations to minor practical improvements.",
+      "files": [],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, src/tasteful_cli/domain.py, src/tasteful_cli/io.py, src/tasteful_cli/__main__.py, tests/test_domain.py, or pyproject.toml.",
+          "paths": [
+            "README.md",
+            "src/tasteful_cli/domain.py",
+            "src/tasteful_cli/io.py",
+            "src/tasteful_cli/__main__.py",
+            "tests/test_domain.py",
+            "pyproject.toml"
+          ]
+        },
+        {
+          "rule_id": "positive_but_not_uncritical",
+          "text": "Report gives a positive but not uncritical verdict for the tasteful CLI."
+        },
+        {
+          "rule_id": "practical_improvement",
+          "text": "Report identifies at least one practical improvement related to runnable examples, CLI usability, error handling, or tests."
+        },
+        {
+          "rule_id": "calibration_comparison",
+          "text": "Report includes calibration comparison against the default corpus or named calibration repositories."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Review the repo at ./evals/fixtures/messy-service with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A critical but bounded report that identifies weak taste with cited evidence for unclear entry points, tangled responsibilities, missing tests, and missing docs; recommends small first steps instead of a rewrite; and states confidence limits.",
+      "files": [],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from app.py, helpers.py, or notes.txt.",
+          "paths": [
+            "app.py",
+            "helpers.py",
+            "notes.txt"
+          ]
+        },
+        {
+          "rule_id": "weak_taste",
+          "text": "Report identifies weak taste with medium or high confidence."
+        },
+        {
+          "rule_id": "messy_service_smells",
+          "text": "Report identifies unclear entry points or cryptic API shape, tangled responsibilities, hidden global state or side effects, missing tests/docs, and manual setup or recovery."
+        },
+        {
+          "rule_id": "small_first_steps",
+          "text": "Report recommends small first steps instead of demanding a broad rewrite."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review the repo at ./evals/fixtures/trap-stack with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A report that catches architectural traps: mutable email identifiers for durable joins, unnecessary multi-service workflow where a smaller model-native/local path could work, wasteful data copying/serialization, hidden manual UI documentation steps, and missing verifiable specs.",
+      "files": [],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, docs/ui-runbook.md, join_users.py, or pipeline.py.",
+          "paths": [
+            "README.md",
+            "docs/ui-runbook.md",
+            "join_users.py",
+            "pipeline.py"
+          ]
+        },
+        {
+          "rule_id": "mutable_email_identifier",
+          "text": "Report flags email-based matching as a mutable identifier problem and recommends persistent user or provider IDs."
+        },
+        {
+          "rule_id": "manual_ui_or_spreadsheet",
+          "text": "Report flags manual UI/spreadsheet steps or missing agent-native executable documentation."
+        },
+        {
+          "rule_id": "structural_efficiency",
+          "text": "Report flags structural efficiency or serialization/copying issues and recommends a smaller local/scripted workflow where appropriate."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review the repo at ./evals/fixtures/one-shot-cleanup with Repo Radar for code taste. Produce a concise evidence-backed report with scores, strengths, taste smells, recommendations, calibration comparison, verification and agent fit, and confidence limits.",
+      "expected_output": "A report that recognizes a one-shot cleanup script should optimize for readability and dev-speed, avoids generic best-practice recommendations such as scalability work or framework adoption unless explicitly framed as a tradeoff, and keeps recommendations small and local.",
+      "files": [],
+      "expectations": [
+        {
+          "rule_id": "required_sections",
+          "text": "Report includes the required repo-radar sections: Verdict, Inferred project values, Scores, Strengths, Taste Smells, Recommendations, Calibration Comparison, Verification and Agent Fit, and Confidence Limits."
+        },
+        {
+          "rule_id": "cites_repo_evidence",
+          "text": "Report cites concrete repo evidence from README.md, cleanup_export.py, or tests/test_cleanup_export.py.",
+          "paths": [
+            "README.md",
+            "cleanup_export.py",
+            "tests/test_cleanup_export.py"
+          ]
+        },
+        {
+          "rule_id": "readability_or_dev_speed_values",
+          "text": "Report infers readability or dev-speed as project values from evidence."
+        },
+        {
+          "rule_id": "avoid_generic_best_practices",
+          "text": "Report avoids generic best-practice recommendations such as scalability, microservices, formal methods, or framework adoption unless it labels them as a tradeoff tied to inferred values."
+        },
+        {
+          "rule_id": "small_local_recommendations",
+          "text": "Report keeps recommendations small and local to readability, tests, docs, or script ergonomics."
+        }
+      ]
+    }
+  ]
+}

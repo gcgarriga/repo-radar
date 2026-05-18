@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tasteful-cli"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[project.scripts]
+tasteful-cli = "tasteful_cli.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

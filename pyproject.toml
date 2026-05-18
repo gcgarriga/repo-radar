@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repo-radar"
+version = "0.1.0"
+description = "Skill and custom subagent for Repo Radar evidence-backed code taste reports."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "gcgarriga" },
+]
+keywords = [
+  "code-review",
+  "code-quality",
+  "copilot",
+  "developer-tools",
+  "repository-analysis",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/gcgarriga/repo-radar"
+Repository = "https://github.com/gcgarriga/repo-radar"
+Issues = "https://github.com/gcgarriga/repo-radar/issues"
+
+[project.scripts]
+repo-radar = "repo_radar.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.setuptools]
+packages = ["repo_radar"]
+
+[tool.setuptools.package-data]
+repo_radar = [
+  "_artifacts/agents/*.md",
+  "_artifacts/calibration/*.json",
+  "_artifacts/skills/repo-radar/SKILL.md",
+  "_artifacts/templates/*.md",
+  "_artifacts/templates/*.json",
+]
