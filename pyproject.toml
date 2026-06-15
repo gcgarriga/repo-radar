@@ -40,7 +40,7 @@ repo-radar = "repo_radar.cli:main"
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=9.0.3",
+  "pytest>=9.1.0",
 ]
 
 [tool.pytest.ini_options]
